@@ -17,9 +17,10 @@ class CURLHelper {
 
   private $url;
 
-  public function __construct() {
+  public function __construct($summoner_name) {
     $this->curl_instance = curl_init();
-    $this->url = self::BASE_API_URL . 'na/v1.4/summoner/by-name/BumblingBear?api_key=' . self::API_KEY;
+    // TODO make the na and 1.4 be params
+    $this->url = self::BASE_API_URL . 'na/v1.4/summoner/by-name/' . $summoner_name . '?api_key=' . self::API_KEY;
   }
 
   public function make_api_call() {
