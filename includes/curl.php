@@ -20,7 +20,12 @@ class CURLHelper {
   public function __construct($summoner_name) {
     $this->curl_instance = curl_init();
     // TODO make the na and 1.4 be params
-    $this->url = self::BASE_API_URL . 'na/v1.4/summoner/by-name/' . $summoner_name . '?api_key=' . self::API_KEY;
+    $this->url = self::BASE_API_URL . 'na/v1.4/summoner/by-name/' . $this->clean_api_input($summoner_name) . '?api_key=' . self::API_KEY;
+    var_dump($this->url);
+  }
+
+  private function clean_api_input($input) {
+    return str_replace(' ', '', $input);
   }
 
   public function make_api_call() {
