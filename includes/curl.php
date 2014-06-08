@@ -6,7 +6,7 @@
 class CURLHelper {
 
   // The base URL of all API calls.
-  const BASE_API_URL = 'https://na.api.pvp.net/api/lol/';
+  const BASE_API_URL = 'api.pvp.net/api/lol/';
 
   // API key that needs to be passed along with all calls.
   const API_KEY = '25f78534-b9f9-43de-93c4-a371dad3066c';
@@ -17,22 +17,26 @@ class CURLHelper {
 
   private $url;
 
-  public function __construct($summoner_name) {
+  public function __construct() {
     $this->curl_instance = curl_init();
-    // TODO make the na and 1.4 be params
-    $this->url = self::BASE_API_URL . 'na/v1.4/summoner/by-name/' . $this->clean_api_input($summoner_name) . '?api_key=' . self::API_KEY;
-    var_dump($this->url);
   }
 
   private function clean_api_input($input) {
     return str_replace(' ', '', $input);
   }
 
-  public function make_api_call() {
+  public function make_api_call($summoner_name, $region) {
+    // TODO make the na and 1.4 be params
+    $this->url = 'https://' . $region . '.' . self::BASE_API_URL . $region . '/v1.4/summoner/by-name/' . $this->clean_api_input($summoner_name) . '?api_key=' . self::API_KEY;
+
+    var_dump($this->url);
+    echo '<br>';
+
     $this->set_curl_options();
     $this->set_ssl_settings();
 
     $result = curl_exec($this->curl_instance);
+
     curl_close($this->curl_instance);
 
     return $result;
