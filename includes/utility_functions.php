@@ -39,13 +39,18 @@ function clean_request_data($data) {
  *
  * @param array  $menu_data The list of options to display in the menu.
  * @param string $menu_name The name attribute for the menu.
- * @param string $selected  (Optional) The selected option on the menu, if any.
+ * @param string $selected  (Optional) The selected option on the menu.
+ * @param string $default   (Optional) The default selected value in the menu, if $selected is empty.
  *
  * @return string The HTML for the menu.
  */
-function build_menu($menu_data, $menu_name, $selected = '') {
+function build_menu($menu_data, $menu_name, $selected = '', $default_value = '') {
   // Start of the menu with the name attribute.
   $menu_html = '<select name="' . htmlentities($menu_name) . '">';
+
+  if (empty($selected) && !empty($default_value)) {
+    $selected = $default_value;
+  }
 
   // Iterate through each option in the data and add it as an option on the menu.
   foreach ($menu_data as $option) {
