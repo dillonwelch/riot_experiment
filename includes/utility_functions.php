@@ -70,3 +70,14 @@ function build_menu($menu_data, $menu_name, $selected = '', $default_value = '')
 
   return $menu_html;
 }
+
+/**
+ * Tests if the page is the current page we are on.
+ *
+ * @param string $file_name The name of the page we are testing.
+ *
+ * @return bool True if the page is the current page we are on, false if it is not.
+ */
+function is_current_page($file_name) {
+  return (basename($_SERVER['PHP_SELF']) == $file_name);
+}
