@@ -25,11 +25,13 @@ $result = json_decode($curl_helper->make_api_call(), true);
 
 echo '<table>';
 
-foreach ($result[$summoner_name] as $key => $value) {
-  echo '<tr>';
-  echo '<td>' . $key . '<td>';
-  echo '<td>' . $value . '<tr>';
-  echo '</tr>';
+foreach ($result as $summoner) {
+  foreach ($summoner as $key => $value) {
+    echo '<tr>';
+    echo '<td>' . $key . '<td>';
+    echo '<td>' . $value . '<tr>';
+    echo '</tr>';
+  }
 }
 
 echo '</table>';
