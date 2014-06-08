@@ -3,22 +3,20 @@
 require_once '/includes/curl.php';
 require_once '/includes/utility_functions.php';
 
-$b_form_submitted = get_request_data('form_submit');
 $summoner_name = get_request_data('summoner_name');
 
-//TODO html and body tags
-
+// TODO why doesn't it work when I directly have the HTML for this???
 echo '
 <html>
 <body>
 <form method="POST">
 Summoner Name: <input type="text" name="summoner_name">
-<input type="submit" name="form_submit" value="1">
+<input type="submit" name="form_submit">
 </form>
 ';
 
 
-if ($b_form_submitted) {
+if (!empty($summoner_name)) {
 
 $curl_helper = new CURLHelper($summoner_name);
 
