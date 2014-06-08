@@ -44,15 +44,23 @@ function clean_request_data($data) {
  * @return string The HTML for the menu.
  */
 function build_menu($menu_data, $menu_name, $selected = '') {
-  $menu_html = '<select name="' . $menu_name . '">';
+  // Start of the menu with the name attribute.
+  $menu_html = '<select name="' . htmlentities($menu_name) . '">';
+
+  // Iterate through each option in the data and add it as an option on the menu.
   foreach ($menu_data as $option) {
     $selected_text = '';
+
+    // If the current option is selected, add the selected attribute.
     if ($option == $selected) {
       $selected_text = 'selected="selected"';
     }
 
-    $menu_html .= '<option value="' . $option . '" ' . $selected_text . '>' . htmlentities($option) . '</option>';
+    // HTML for the option.
+    $menu_html .= '<option value="' . htmlentities($option) . '" ' . $selected_text . '>' . htmlentities($option) . '</option>';
   }
+
+  // Close the menu.
   $menu_html .= '</select>';
 
   return $menu_html;
