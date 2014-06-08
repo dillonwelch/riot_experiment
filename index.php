@@ -2,23 +2,22 @@
 
 require_once '/includes/curl.php';
 
-
-echo "Hey there!<br>";
-
 $curl_helper = new CURLHelper();
 
-$result = $curl_helper->make_api_call();
+//TODO what if call goes bad?
+$result = json_decode($curl_helper->make_api_call(), true);
 
-echo '<br><br><br><br>';
+echo '<table>';
 
-echo count($result);
+foreach ($result['bumblingbear'] as $key => $value) {
+  echo '<tr>';
+  echo '<td>' . $key . '<td>';
+  echo '<td>' . $value . '<tr>';
+  echo '</tr>';
+}
+
+echo '</table>';
 
 echo '<br><br>';
-
-echo var_dump($result);
-
-echo '<br><br>';
-
-echo "<br>That was fun.<br>";
 
 echo '"This product is not endorsed, certified or otherwise approved in any way by Riot Games, Inc. or any of its affiliates."';
