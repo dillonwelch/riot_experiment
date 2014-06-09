@@ -3,7 +3,7 @@
  * Helper class for making cURL calls to Riot API.
  */
 
-class CURLHelper {
+class CURL_Helper {
 
   // The base URL of all API calls.
   const BASE_API_URL = 'api.pvp.net/api/lol/';
@@ -20,14 +20,32 @@ class CURLHelper {
   // URL of the API we are requesting.
   private $url;
 
+  // Region that we are making the API call to.
+  private $region;
+
+  // Version number of the API we are making the call to. Set in the child API class.
+  protected $version_number;
+
   /**
    * Constructor.
    *
    * @return void
    */
-  public function __construct() {
+  public function __construct($region) {
     // Create a cURL object to use.
     $this->curl_instance = curl_init();
+
+    $this->region = $region;
+  }
+
+  /**
+   * Destructor.
+   *
+   * @return void
+   */
+  public function __destruct() {
+    // Close out the cURL object.
+    curl_close($this->curl_instance);
   }
 
   /**
@@ -37,24 +55,24 @@ class CURLHelper {
    *
    * @return mixed The cleaned input.
    */
-  private function clean_api_input($input) {
+  protected function clean_api_input($input) {
     // Strip any spaces out of the input.
     return str_replace(' ', '', $input);
   }
 
-  public function make_api_call($summoner_name, $region) {
+  public function make_api_call($api_url) {
     // TODO make the na and 1.4 be params
-    $this->url = 'https://' . $region . '.' . self::BASE_API_URL . $region . '/v1.4/summoner/by-name/' . $this->clean_api_input($summoner_name) . '?api_key=' . self::API_KEY;
+    $this->url = 'https://' . $this->region . '.' . self::BASE_API_URL . $this->region . '/v' . $this->version_number . $api_url . '?api_key=' . self::API_KEY;
 
+    // TODO remove.
     var_dump($this->url);
     echo '<br>';
 
+    // Set the cURL options for the call.
     $this->set_curl_options();
 
     // TODO check for response codes
     $result = curl_exec($this->curl_instance);
-
-    curl_close($this->curl_instance);
 
     return $result;
   }
