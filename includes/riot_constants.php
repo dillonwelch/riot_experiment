@@ -1,6 +1,9 @@
 <?php
+/**
+ * Defines the various constants used by the Riot API.
+ */
 
-// Constants for the various regions. Used in building the API calls.
+// Constants for the various regions.
 define('REGION_BR', 'br');
 define('REGION_EUNE', 'eune');
 define('REGION_EUW', 'euw');

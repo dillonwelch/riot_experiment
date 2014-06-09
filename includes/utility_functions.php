@@ -92,3 +92,18 @@ function is_current_page($file_name) {
 function get_regions_list() {
   return array(REGION_BR, REGION_EUNE, REGION_EUW, REGION_KR, REGION_LAN, REGION_LAS, REGION_NA, REGION_OCE, REGION_RU, REGION_TR);
 }
+
+/**
+ * Clears a cookie out of $_COOKIE and out of the browser.
+ *
+ * @param string The name of the cookie to clear.
+ *
+ * @return void
+ */
+function clear_cookie($cookie_name) {
+  // Clear the cookie out of $_COOKIE.
+  unset($_COOKIE[$cookie_name]);
+
+  // Clear the cookie out of the browser by setting the value to empty and the expiration in the past.
+  setcookie($cookie_name, '', time() - 3600);
+}
