@@ -30,8 +30,11 @@ if (!empty($summoner_name)) {
   if (!empty($result)) {
     echo $summoner_name . ' was found. Adding to the list.';
 
-    // List is in the form of array(region1 => array(summoner1, summoner2, ...), region2 => array(summoner1, summoner2, ...), ...)
-    $following_list[$region][] = $summoner_name;
+    // Save the Summoner's ID so we can use it for future API calls.
+    $summoner_id = $result[strtolower($summoner_name)]['id'];
+
+    // List is in the form of array(region1 => array(summonerID1 => summoner1, summonerID2 => summoner2, ...), ...)
+    $following_list[$region][$summoner_id] = $summoner_name;
 
     // Serialize the array and store it in a cookie.
     setcookie('follower_list', serialize($following_list));
@@ -57,14 +60,16 @@ if (empty($following_list)) {
   $table_html .= '<tr>';
   $table_html .= '<td>Region</td>';
   $table_html .= '<td>Summoner Name</td>';
+  $table_html .= '<td>Summoner ID</td>';
   $table_html .= '</tr>';
 
   // Print out the list of summoners.
   foreach ($following_list as $region => $summoner_list) {
-    foreach ($summoner_list as $summoner) {
+    foreach ($summoner_list as $id => $summoner) {
       $table_html .= '<tr>';
       $table_html .= '<td>' . $region . '</td>';
       $table_html .= '<td>' . $summoner . '</td>';
+      $table_html .= '<td>' . $id . '</td>';
       $table_html .= '</tr>';
     }
   }

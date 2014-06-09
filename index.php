@@ -7,7 +7,9 @@ require_once '/includes/header.php';
 ?>
 
 <p>Where do you want to go?</p>
-<a href="/riot_experiment/add_summoner.php">Add a summoner to your list of people to follow.</a>
+<a href="/riot_experiment/add_summoner.php">Add a summoner to your list of summoners to follow.</a>
+<br><br>
+<a href="/riot_experiment/check_summoner_stats.php">Check the stats of the summoners you are following.</a>
 
 
 <br><br><br>
