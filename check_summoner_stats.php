@@ -1,6 +1,7 @@
 <?php
 
 require_once '/includes/utility_functions.php';
+require_once '/includes/game_api.php';
 
 require_once '/includes/header.php';
 
@@ -39,7 +40,16 @@ if (empty($following_list)) {
   echo $table_html;
   echo '<br>';
 
+  $game_api = new Game_API();
+
   foreach ($following_list as $region => $summoner_list) {
+    foreach ($summoner_list as $id => $summoner) {
+      $result = $game_api->get_recent_game_data($id, $region);
+      var_dump($result);
+      //todo bundle calls into one call for all IDs.
+      break;
+    }
+    break;
   }
 }
 
