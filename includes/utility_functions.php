@@ -3,6 +3,8 @@
  * Functions with no other place to go.
  */
 
+require_once '/includes/riot_constants.php';
+
 /**
  * Get a variable from the request, with cleaning included.
  *
@@ -80,4 +82,13 @@ function build_menu($menu_data, $menu_name, $selected = '', $default_value = '')
  */
 function is_current_page($file_name) {
   return (basename($_SERVER['PHP_SELF']) == $file_name);
+}
+
+/**
+ * Returns an array with the region constants.
+ *
+ * @return array An array of the region constants.
+ */
+function get_regions_list() {
+  return array(REGION_BR, REGION_EUNE, REGION_EUW, REGION_KR, REGION_LAN, REGION_LAS, REGION_NA, REGION_OCE, REGION_RU, REGION_TR);
 }

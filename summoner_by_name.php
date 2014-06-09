@@ -13,7 +13,7 @@ require_once '/includes/header.php';
 $summoner_name = get_request_data('summoner_name');
 $region = get_request_data('region_menu');
 
-$regions = ['br', 'eune', 'euw', 'kr', 'lan', 'las', 'na', 'oce', 'ru', 'tr'];
+$regions = get_regions_list();
 
 // TODO why doesn't it work when I directly have the HTML for this???
 echo '

@@ -64,10 +64,6 @@ class CURL_Helper {
     // TODO make the na and 1.4 be params
     $this->url = 'https://' . $this->region . '.' . self::BASE_API_URL . $this->region . '/v' . $this->version_number . $api_url . '?api_key=' . self::API_KEY;
 
-    // TODO remove.
-    var_dump($this->url);
-    echo '<br>';
-
     // Set the cURL options for the call.
     $this->set_curl_options();
 
