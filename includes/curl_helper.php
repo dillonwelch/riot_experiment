@@ -20,9 +20,6 @@ class CURL_Helper {
   // URL of the API we are requesting.
   private $url;
 
-  // Region that we are making the API call to.
-  private $region;
-
   // Version number of the API we are making the call to. Set in the child API class.
   protected $version_number;
 
@@ -31,11 +28,9 @@ class CURL_Helper {
    *
    * @return void
    */
-  public function __construct($region) {
+  public function __construct() {
     // Create a cURL object to use.
     $this->curl_instance = curl_init();
-
-    $this->region = $region;
   }
 
   /**
@@ -60,9 +55,9 @@ class CURL_Helper {
     return str_replace(' ', '', $input);
   }
 
-  public function make_api_call($api_url) {
+  public function make_api_call($api_url, $region) {
     // TODO make the na and 1.4 be params
-    $this->url = 'https://' . $this->region . '.' . self::BASE_API_URL . $this->region . '/v' . $this->version_number . $api_url . '?api_key=' . self::API_KEY;
+    $this->url = 'https://' . $region . '.' . self::BASE_API_URL . $region . '/v' . $this->version_number . $api_url . '?api_key=' . self::API_KEY;
 
     // Set the cURL options for the call.
     $this->set_curl_options();

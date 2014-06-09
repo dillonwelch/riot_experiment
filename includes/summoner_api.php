@@ -29,9 +29,9 @@ class Summoner_API extends CURL_Helper {
    * Make a call to the 'by-name' operation.
    *
    */
-  public function get_summoner_by_name($summoner_names) {
+  public function get_summoner_by_name($summoner_names, $region) {
     $api_url = '/' . self::BASE_API_NAME . '/by-name/' . htmlentities($this->clean_api_input($summoner_names));
-    return $this->make_api_call($api_url);
+    return $this->make_api_call($api_url, $region);
   }
 
 

@@ -38,6 +38,9 @@ if (empty($following_list)) {
 
   echo $table_html;
   echo '<br>';
+
+  foreach ($following_list as $region => $summoner_list) {
+  }
 }
 
 require_once '/includes/footer.php';

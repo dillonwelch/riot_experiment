@@ -31,7 +31,7 @@ if (!empty($summoner_name)) {
   $curl_helper = new Summoner_API($region);
 
   //TODO what if call goes bad?
-  $result = json_decode($curl_helper->get_summoner_by_name($summoner_name), true);
+  $result = json_decode($curl_helper->get_summoner_by_name($summoner_name, $region), true);
 
   if (!empty($result)) {
 

@@ -24,7 +24,7 @@ if (!empty($summoner_name)) {
   $curl_helper = new Summoner_API($region);
 
   // Check if the summoner exists in this region.
-  $result = json_decode($curl_helper->get_summoner_by_name($summoner_name), true);
+  $result = json_decode($curl_helper->get_summoner_by_name($summoner_name, $region), true);
 
   // Add the summoner to the list if the name was found.
   if (!empty($result)) {
