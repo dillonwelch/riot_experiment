@@ -21,23 +21,27 @@ $following_list = get_cookie('follower_list', true);
 
 // If we have a summoner name to add, let's try and add it to the list.
 if (!empty($summoner_name)) {
-  $curl_helper = new Summoner_API($region);
+  $summoner_api = new Summoner_API($region);
 
   // Check if the summoner exists in this region.
-  $result = $curl_helper->get_summoner_by_name($summoner_name, $region);
+  $result = $summoner_api->get_summoner_by_name($summoner_name, $region);
 
   // Add the summoner to the list if the name was found.
   if (!empty($result)) {
-    echo $summoner_name . ' was found. Adding to the list.';
+    if ($summoner_api->b_successful_call) {
+      echo $summoner_name . ' was found. Adding to the list.';
 
-    // Save the Summoner's ID so we can use it for future API calls.
-    $summoner_id = $result[strtolower($summoner_name)]['id'];
+      // Save the Summoner's ID so we can use it for future API calls.
+      $summoner_id = $result[strtolower($summoner_name)]['id'];
 
-    // List is in the form of array(region1 => array(summonerID1 => summoner1, summonerID2 => summoner2, ...), ...)
-    $following_list[$region][$summoner_id] = $summoner_name;
+      // List is in the form of array(region1 => array(summonerID1 => summoner1, summonerID2 => summoner2, ...), ...)
+      $following_list[$region][$summoner_id] = $summoner_name;
 
-    // Serialize the array and store it in a cookie.
-    setcookie('follower_list', serialize($following_list));
+      // Serialize the array and store it in a cookie.
+      setcookie('follower_list', serialize($following_list));
+    } else {
+      echo 'There was an error making the request. Message: ' . htmlentities($result['status']['message']) . '. Status Code: ' . htmlentities($result['status']['status_code']) . '.';
+    }
   } else {
     echo $summoner_name . ' was not found. Please try again.';
   }

@@ -11,8 +11,7 @@ require_once '/includes/header.php';
 <br><br>
 <a href="/riot_experiment/check_summoner_stats.php">Check the stats of the summoners you are following.</a>
 
-
-<br><br><br>
+<br><br>
 <a href="/riot_experiment/summoner_by_name.php">Find a summoner's basic data by summoner name (Hello World page).</a>
 
 <?

@@ -64,7 +64,9 @@ if (empty($following_list)) {
         $table_html .= '<td>' . htmlentities($recent_game_stats['totalDamageDealtToChampions']) . '</td>';
         $table_html .= '</tr>';
       } else {
-        $table_html .= '<tr><td>There was an error making the request.</td></tr>';
+        $table_html .= '<tr>';
+        $table_html .= '<td>There was an error making the request. Message: ' . htmlentities($result['status']['message']) . '. Status Code: ' . htmlentities($result['status']['status_code']) . '.</td>';
+        $table_html .= '</tr>';
       }
     }
   }
