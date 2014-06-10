@@ -54,12 +54,19 @@ class CURL_Helper {
    * @return mixed The cleaned input.
    */
   protected function clean_api_input($input) {
-    // Strip any spaces out of the input.
-    return str_replace(' ', '', $input);
+    // Strip any spaces out of the input and encode any special html characters.
+    return htmlentities(str_replace(' ', '', $input));
   }
 
+  /**
+   * Generic function for making a Riot API call.
+   *
+   * @param string $api_url The URL for the API to call.
+   * @param string $region  The region we are making the API call to.
+   *
+   * @return array The result of the API call.
+   */
   public function make_api_call($api_url, $region) {
-    // TODO make the na and 1.4 be params
     $this->url = 'https://' . $region . '.' . self::BASE_API_URL . $region . '/v' . $this->version_number . $api_url . '?api_key=' . self::API_KEY;
 
     // Set the cURL options for the call.

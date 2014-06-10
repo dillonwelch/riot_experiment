@@ -17,14 +17,14 @@ if (get_request_data('clear_following') == 'Yes') {
 }
 
 // Get the list of people we are following.
-$following_list = (array_key_exists('follower_list', $_COOKIE) ? unserialize($_COOKIE['follower_list']) : '');
+$following_list = get_cookie('follower_list', true);
 
 // If we have a summoner name to add, let's try and add it to the list.
 if (!empty($summoner_name)) {
   $curl_helper = new Summoner_API($region);
 
   // Check if the summoner exists in this region.
-  $result = json_decode($curl_helper->get_summoner_by_name($summoner_name, $region), true);
+  $result = $curl_helper->get_summoner_by_name($summoner_name, $region);
 
   // Add the summoner to the list if the name was found.
   if (!empty($result)) {

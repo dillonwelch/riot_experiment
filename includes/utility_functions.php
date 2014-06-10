@@ -118,6 +118,7 @@ function clear_cookie($cookie_name) {
  */
 function get_cookie($cookie_name, $b_is_array) {
   if (array_key_exists($cookie_name, $_COOKIE)) {
+    // If the cookie value is supposed to be an array, unserialize it.
     if ($b_is_array) {
       return unserialize($_COOKIE[$cookie_name]);
     } else {
