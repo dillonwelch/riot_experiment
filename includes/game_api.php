@@ -30,13 +30,10 @@ class Game_API extends CURL_Helper {
    * Make a call to the 'by-name' operation.
    *
    */
-  public function get_recent_game_data($summoner_ids, $region) {
+  public function get_recent_game_data($summoner_id, $region) {
     //$api_url = '/' . self::BASE_API_NAME . '/by-summoner/' . htmlentities(implode($this->clean_api_input($summoner_ids), ','));
     //todo move htmlentities into clean api input
-    if (is_array($summoner_ids)) {
-      $summoner_ids = implode($this->clean_api_input($summoner_ids), ',');
-    }
-    $api_url = '/' . self::BASE_API_NAME . '/by-summoner/' . htmlentities($summoner_ids) . '/recent';
+    $api_url = '/' . self::BASE_API_NAME . '/by-summoner/' . htmlentities($summoner_id) . '/recent';
     return $this->make_api_call($api_url, $region);
   }
 
