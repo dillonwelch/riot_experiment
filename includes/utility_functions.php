@@ -107,3 +107,23 @@ function clear_cookie($cookie_name) {
   // Clear the cookie out of the browser by setting the value to empty and the expiration in the past.
   setcookie($cookie_name, '', time() - 3600);
 }
+
+/**
+ * Gets a cookie value from $_COOKIE.
+ *
+ * @param string $cookie_name The name of the cookie.
+ * @param bool   $b_is_array  IF the cookie value is an array.
+ *
+ * @return mixed The value of the cookie.
+ */
+function get_cookie($cookie_name, $b_is_array) {
+  if (array_key_exists($cookie_name, $_COOKIE)) {
+    if ($b_is_array) {
+      return unserialize($_COOKIE[$cookie_name]);
+    } else {
+      return $_COOKIE[$cookie_name];
+    }
+  } else {
+    return '';
+  }
+}

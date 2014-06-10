@@ -65,6 +65,7 @@ class CURL_Helper {
     // TODO check for response codes
     $result = curl_exec($this->curl_instance);
 
+
     return $result;
   }
 
