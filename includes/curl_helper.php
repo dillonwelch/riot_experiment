@@ -23,6 +23,9 @@ class CURL_Helper {
   // Version number of the API we are making the call to. Set in the child API class.
   protected $version_number;
 
+  // If the last call made was successful.
+  public $b_successful_call;
+
   /**
    * Constructor.
    *
@@ -62,9 +65,15 @@ class CURL_Helper {
     // Set the cURL options for the call.
     $this->set_curl_options();
 
-    // TODO check for response codes
-    $result = curl_exec($this->curl_instance);
+    // Make the API call.
+    $result = json_decode(curl_exec($this->curl_instance), true);
 
+    // Check the status.
+    if (!empty($result['status'])) {
+      $this->b_successful_call = false;
+    } else {
+      $this->b_successful_call = true;
+    }
 
     return $result;
   }
